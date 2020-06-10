@@ -93,8 +93,8 @@ def get_dict(*keys, **extras):
     return out_d
 
 
-def start_server():
-    thread = threading.Thread(target=app.run, daemon=True)
+def start_server(host='0.0.0.0', port=8000):
+    thread = threading.Thread(target=app.run(host=host, port=port), daemon=True)
     thread.start()
     return thread
 
