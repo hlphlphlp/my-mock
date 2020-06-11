@@ -10,7 +10,7 @@ from mock_server import add_route, start_server
 if __name__ == '__main__':
     add_route(url='/hello', response={"hello": "world"})
 
-    add_route(url='/gcm/send', method='POST', headers={'content-type': "application/json; charset=UTF-8"}, response={
+    add_route(url='/gcm/send', method='POST', response={
                                            "multicast_id": 8507328404259215356,
                                            "success": 1,
                                            "failure": 0,
@@ -21,6 +21,6 @@ if __name__ == '__main__':
                                                }
                                             ]
                                          })
-    add_route(url='/v1/pas/send', method='POST', headers={'content-type': "application/json; charset=UTF-8"}, response={})
+    add_route(url='/v1/pas/send', method='POST', response={})
     start_server()
     time.sleep(3000)

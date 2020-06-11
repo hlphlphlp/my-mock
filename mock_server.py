@@ -46,7 +46,6 @@ def add_route(url: str,
             callback(request, *args, **kwargs)
         json_response = jsonify(response)
         if headers is not None:
-            print(json_response.headers)
             json_response.headers.update(headers)
         if request.method == 'GET':
             request_dict = get_dict("url", "args", "headers", "origin")
