@@ -46,13 +46,14 @@ def add_route(url: str,
             callback(request, *args, **kwargs)
         json_response = jsonify(response)
         if headers is not None:
+            print(json_response.headers)
             json_response.headers.update(headers)
         if request.method == 'GET':
             request_dict = get_dict("url", "args", "headers", "origin")
             mock_box_dict[url].append(request_dict)
         else:
             request_dict = get_dict("url", "args", "form", "data", "origin", "headers", "files", "json")
-            mock_box_dict['url'].append(request_dict)
+            mock_box_dict[url].append(request_dict)
         print(json.dumps(request_dict))
         return json_response, status_code
 
@@ -93,7 +94,7 @@ def get_dict(*keys, **extras):
     return out_d
 
 
-def start_server(host='0.0.0.0', port=8000):
+def start_server(host='0.0.0.0', port=5000):
     thread = threading.Thread(target=app.run(host=host, port=port), daemon=True)
     thread.start()
     return thread

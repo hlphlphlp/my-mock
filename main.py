@@ -8,8 +8,19 @@ import time
 from mock_server import add_route, start_server
 
 if __name__ == '__main__':
-    add_route(url='/v1/books/', response=[{'id': 1}], method='GET')
-    add_route(url='/', response={})
     add_route(url='/hello', response={"hello": "world"})
+
+    add_route(url='/gcm/send', method='POST', headers={'content-type': "application/json; charset=UTF-8"}, response={
+                                           "multicast_id": 8507328404259215356,
+                                           "success": 1,
+                                           "failure": 0,
+                                           "canonical_ids": 0,
+                                            "results": [
+                                               {
+                                                  "message_id": "0:1430983178997591%921c249af9fd7ecd"
+                                               }
+                                            ]
+                                         })
+    add_route(url='/v1/pas/send', method='POST', headers={'content-type': "application/json; charset=UTF-8"}, response={})
     start_server()
-    time.sleep(300)
+    time.sleep(3000)
