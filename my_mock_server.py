@@ -93,8 +93,8 @@ def get_dict(*keys, **extras):
     return out_d
 
 
-def start_server(host='0.0.0.0', port=5000):
-    thread = threading.Thread(target=app.run(host=host, port=port), daemon=True)
+def start_server():
+    thread = threading.Thread(target=app.run, daemon=True)
     thread.start()
     return thread
 
@@ -105,9 +105,8 @@ def pytest_configure(config):
 
 def pytest_runtest_setup(item):
     markers = list(item.iter_markers('server'))
-    print(markers)
     if len(markers) > 0:
-        os.environ['WERKZEUG_RUN_MAx`IN'] = 'true'
+        os.environ['WERKZEUG_RUN_MAIN'] = 'true'
         for marker in markers:
             add_route(*marker.args, **marker.kwargs)
         start_server()
